@@ -56,8 +56,8 @@ function generarCV(estilo, accion = "download") {
 function sharePDF(doc, nombre) {
   // Si se está ejecutando en Android y existe la interfaz nativa, se invoca shareContent
   if (window.Android && typeof Android.shareContent === "function") {
-    // Aquí se envía un mensaje simple; si se requiere enviar información más detallada, se puede adaptar.
-    Android.shareContent("Mi CV PDF", "Aquí está mi CV generado.");
+    // Se envía un único string combinando título y mensaje.
+    Android.shareContent("Mi CV PDF - Aquí está mi CV generado.");
   } else {
     // Fallback a Web Share API
     const pdfBlob = doc.output("blob");
