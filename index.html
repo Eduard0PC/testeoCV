@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de CV</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Generador de Currículum</h1>
+    <form id="cvForm">
+      <input type="text" placeholder="Nombre completo" id="nombre" required />
+      <input type="text" placeholder="Profesión" id="profesion" required />
+      <textarea placeholder="Resumen profesional" id="resumen"></textarea>
+      <textarea placeholder="Experiencia laboral" id="experiencia"></textarea>
+      <textarea placeholder="Educación" id="educacion"></textarea>
+      <textarea placeholder="Habilidades" id="habilidades"></textarea>
+      <button type="submit">Generar PDF / Estilo 1</button>
+      <br><br/>
+      <button type="submit2">Generar PDF / Estilo 2</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
