@@ -52,21 +52,28 @@ function generarCV(estilo, accion = "download") {
   }
 }
 
-// Función para compartir el PDF usando el Web Share API
+// Función para compartir el PDF de forma estandar
 function sharePDF(doc, nombre) {
-  const pdfBlob = doc.output("blob");
-  const file = new File([pdfBlob], `${nombre.replace(/\s+/g, "_")}_CV.pdf`, { type: "application/pdf" });
-
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    navigator.share({
-      files: [file],
-      title: "Mi CV PDF",
-      text: "Aquí está mi CV generado."
-    })
-    .then(() => console.log("Compartido con éxito"))
-    .catch((err) => console.error("Error al compartir", err));
+  // Si se está ejecutando en Android y existe la interfaz nativa, se invoca shareContent
+  if (window.Android && typeof Android.shareContent === "function") {
+    // Aquí se envía un mensaje simple; si se requiere enviar información más detallada, se puede adaptar.
+    Android.shareContent("Mi CV PDF", "Aquí está mi CV generado.");
   } else {
-    alert("La función de compartir no está soportada en este dispositivo.");
+    // Fallback a Web Share API
+    const pdfBlob = doc.output("blob");
+    const file = new File([pdfBlob], `${nombre.replace(/\s+/g, "_")}_CV.pdf`, { type: "application/pdf" });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({
+        files: [file],
+        title: "Mi CV PDF",
+        text: "Aquí está mi CV generado."
+      })
+      .then(() => console.log("Compartido con éxito"))
+      .catch((err) => console.error("Error al compartir", err));
+    } else {
+      alert("La función de compartir no está soportada en este dispositivo.");
+    }
   }
 }
 
